@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class BridgeGame {
     private final List<BridgeDirection> bridge;
     private final List<BridgeMoveResult> moveResult = new ArrayList<>();
-    private int retryCount = 0;
+    private int retryCount = 1;
 
     public BridgeGame(List<String> bridge) {
         validate(bridge);
@@ -20,7 +20,7 @@ public class BridgeGame {
 
     private void validate(List<String> bridge) {
         for (String direction : bridge) {
-            if(!BridgeDirection.isInstance(direction)){
+            if (!BridgeDirection.isInstance(direction)) {
                 throw new IllegalArgumentException("Invalid direction: " + direction);
             }
         }
@@ -60,8 +60,17 @@ public class BridgeGame {
     }
 
     public boolean canContinue() {
-        return moveResult.get(moveResult.size() - 1)
-                .isSuccess();
+        return moveResult.isEmpty() || (moveResult.get(moveResult.size() - 1)
+                .isSuccess() && !isFinished());
+    }
+
+    public boolean isFinished() {
+        return moveResult.size() == bridge.size()
+                && moveResult.get(moveResult.size() - 1).isSuccess();
+    }
+
+    public boolean canRetry() {
+        return !moveResult.get(moveResult.size() - 1).isSuccess();
     }
 
     public List<BridgeMoveResult> getMoveResult() {

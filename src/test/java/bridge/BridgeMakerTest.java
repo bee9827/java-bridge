@@ -18,7 +18,6 @@ class BridgeMakerTest {
         bridgeMaker = new BridgeMaker(new DownGenerator());
         List<String> downBridge = bridgeMaker.makeBridge(3);
 
-
         assertThat(upBridge).hasSize(3);
         assertThat(downBridge).hasSize(3);
         for (int i = 0; i < upBridge.size(); i++) {
@@ -34,6 +33,7 @@ class BridgeMakerTest {
             return 1;
         }
     }
+
     private class DownGenerator implements BridgeNumberGenerator {
         @Override
         public int generate() {
