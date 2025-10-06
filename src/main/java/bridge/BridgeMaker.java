@@ -18,7 +18,7 @@ public class BridgeMaker {
      * @return 입력받은 길이에 해당하는 다리 모양. 위 칸이면 "U", 아래 칸이면 "D"로 표현해야 한다.
      */
     public List<String> makeBridge(int size) {
-        List<String> bridge = new ArrayList<>();
+        List<java.lang.String> bridge = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             int value = bridgeNumberGenerator.generate();
             addValue(bridge, value);
@@ -27,10 +27,10 @@ public class BridgeMaker {
     }
 
     private void addValue(List<String> bridge, int value) {
-        if (value == BridgeValue.UP.getValue()) {
-            bridge.add(BridgeValue.UP.getName());
-        } else if (value == BridgeValue.DOWN.getValue()) {
-            bridge.add(BridgeValue.DOWN.getName());
+        if (value == BridgeDirection.U.getValue()) {
+            bridge.add(BridgeDirection.U.toString());
+        } else if (value == BridgeDirection.D.getValue()) {
+            bridge.add(BridgeDirection.D.toString());
         }
     }
 }
